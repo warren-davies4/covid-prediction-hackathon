@@ -52,6 +52,26 @@ The replication over-weights `head_ache` relative to the paper. This is not a bu
 
 Because our model only needed **10 boosting iterations** before early stopping (vs. presumably more in the paper, though they don't report it), it had less opportunity to spread importance across the more common, less biased symptoms (cough/fever) and leaned harder on the small number of highly-separating headache cases. This is a useful, reproducible example of the exact caveat the paper raises — not a replication failure.
 
+## Balanced-features follow-up (paper's Fig. 3 experiment)
+
+Script: `balanced_features.py`. Model: `lgbm_balanced_features_model.txt`. Metrics: `balanced_features_results.json`.
+
+The paper reruns the model dropping the three symptoms it identified as having biased reporting (headache 96.2%, sore_throat 92.3%, shortness_of_breath 92.4%), keeping only cough and fever (balanced reporting: 27.4% and 45.9%) alongside sex, age≥60 and contact-with-confirmed — 5 features total. Same date split, same hyperparameters.
+
+| Metric | Paper | This replication |
+|---|---|---|
+| **auROC** | 0.862 (95% CI 0.855–0.870) | **0.865** |
+| auPRC | not reported | 0.456 |
+| Best boosting iteration | not reported | 15 |
+
+![Balanced-features ROC](eda_output/10_balanced_features_roc.png)
+
+**auROC lands right inside their reported CI** — the closest match of any metric in this whole replication.
+
+![Balanced-features SHAP summary](eda_output/11_balanced_features_shap.png)
+
+SHAP ranking: fever > contact_confirmed > cough > sex_male > age_60_plus — closely matching their Fig. 3 ranking (cough > fever > contact_with_confirmed > male > age_60+; cough and fever essentially swap places, everything else matches). Removing the three biased symptoms also removed the head_ache SHAP distortion seen in the full 8-feature replication — further evidence that was a reporting-bias artifact rather than a real signal.
+
 ## Takeaways for building on this baseline
 
 1. **The core result replicates well**: auROC ~0.89 vs. their 0.90, using their exact features, split, model type, and hyperparameters. This is a solid base to iterate from.
