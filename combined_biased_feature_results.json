@@ -1,0 +1,8 @@
+{
+  "n_train": 42416,
+  "n_val": 10604,
+  "n_test": 48462,
+  "test_auroc": 0.8814407507917866,
+  "test_auprc": 0.4529206766751646,
+  "best_iteration": 12
+}
