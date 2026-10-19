@@ -1,0 +1,20 @@
+{
+  "n_trials": 60,
+  "n_folds": 5,
+  "best_cv_auroc": 0.9355925771564145,
+  "best_params": {
+    "num_leaves": 7,
+    "min_data_in_leaf": 59,
+    "feature_fraction": 0.7154446959919848,
+    "bagging_fraction": 0.9716985486424213,
+    "bagging_freq": 4,
+    "learning_rate": 0.14288365717831378,
+    "lambda_l1": 0.23836096183964298,
+    "lambda_l2": 0.08902319141094964
+  },
+  "best_num_boost_round": 24,
+  "test_auroc": 0.9024280696247623,
+  "test_auprc": 0.6999710861802757,
+  "baseline_test_auroc": 0.889,
+  "baseline_test_auprc": 0.585
+}
