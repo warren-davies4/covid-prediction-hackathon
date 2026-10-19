@@ -1,0 +1,46 @@
+=== Full 8-feature (paper's hyperparameters) ===
+(F1-optimal threshold = 0.0991, n = 48,462, 3,641 actual positives)
+              precision    recall  f1-score   support
+
+    negative      0.981     0.935     0.957     44821
+    positive      0.491     0.772     0.600      3641
+
+    accuracy                          0.923     48462
+   macro avg      0.736     0.853     0.779     48462
+weighted avg      0.944     0.923     0.930     48462
+
+
+=== Balanced 5-feature (biased symptoms dropped) ===
+(F1-optimal threshold = 0.1308, n = 48,462, 3,641 actual positives)
+              precision    recall  f1-score   support
+
+    negative      0.975     0.935     0.955     44821
+    positive      0.468     0.701     0.561      3641
+
+    accuracy                          0.918     48462
+   macro avg      0.721     0.818     0.758     48462
+weighted avg      0.937     0.918     0.925     48462
+
+
+=== Combined 6-feature (biased symptoms -> 1 flag) ===
+(F1-optimal threshold = 0.1019, n = 48,462, 3,641 actual positives)
+              precision    recall  f1-score   support
+
+    negative      0.979     0.935     0.956     44821
+    positive      0.484     0.754     0.590      3641
+
+    accuracy                          0.921     48462
+   macro avg      0.732     0.845     0.773     48462
+weighted avg      0.942     0.921     0.929     48462
+
+
+=== Tuned 8-feature (Optuna + 5-fold CV) ===
+(F1-optimal threshold = 0.3835, n = 48,462, 3,641 actual positives)
+              precision    recall  f1-score   support
+
+    negative      0.973     0.979     0.976     44821
+    positive      0.718     0.672     0.694      3641
+
+    accuracy                          0.955     48462
+   macro avg      0.846     0.825     0.835     48462
+weighted avg      0.954     0.955     0.955     48462
