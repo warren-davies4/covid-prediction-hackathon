@@ -1,0 +1,131 @@
+# EDA raw dump
+
+## Shape
+(278848, 10)
+
+## Dtypes
+test_date                  str
+cough                  float64
+fever                  float64
+sore_throat            float64
+shortness_of_breath    float64
+head_ache              float64
+corona_result              str
+age_60_and_above           str
+gender                     str
+test_indication            str
+dtype: object
+
+## Head
+    test_date  cough  fever  ...  age_60_and_above  gender         test_indication
+0  2020-04-30    0.0    0.0  ...               NaN  female                   Other
+1  2020-04-30    1.0    0.0  ...               NaN  female                   Other
+2  2020-04-30    0.0    1.0  ...               NaN    male                   Other
+3  2020-04-30    1.0    0.0  ...               NaN  female                   Other
+4  2020-04-30    1.0    0.0  ...               NaN    male                   Other
+5  2020-04-30    1.0    0.0  ...               NaN  female                   Other
+6  2020-04-30    1.0    1.0  ...               NaN    male                  Abroad
+7  2020-04-30    0.0    0.0  ...               NaN  female                   Other
+8  2020-04-30    0.0    0.0  ...               NaN    male                   Other
+9  2020-04-30    0.0    0.0  ...               NaN    male  Contact with confirmed
+
+[10 rows x 10 columns]
+
+## Missing values (count)
+test_date                   0
+cough                     252
+fever                     252
+sore_throat                 1
+shortness_of_breath         1
+head_ache                   1
+corona_result               0
+age_60_and_above       127320
+gender                  19563
+test_indication             0
+dtype: int64
+
+## Unique values per column
+test_date: 51 unique -> <StringArray>
+['2020-04-30', '2020-04-29', '2020-04-28', '2020-04-27', '2020-04-26', '2020-04-25', '2020-04-24', '2020-04-23',
+ '2020-04-22', '2020-04-21']
+Length: 10, dtype: str
+cough: 2 unique -> [ 0.  1. nan]
+fever: 2 unique -> [ 0.  1. nan]
+sore_throat: 2 unique -> [ 0.  1. nan]
+shortness_of_breath: 2 unique -> [ 0.  1. nan]
+head_ache: 2 unique -> [ 0.  1. nan]
+corona_result: 3 unique -> <StringArray>
+['negative', 'positive', 'other']
+Length: 3, dtype: str
+age_60_and_above: 2 unique -> <StringArray>
+[nan, 'Yes', 'No']
+Length: 3, dtype: str
+gender: 2 unique -> <StringArray>
+['female', 'male', nan]
+Length: 3, dtype: str
+test_indication: 3 unique -> <StringArray>
+['Other', 'Abroad', 'Contact with confirmed']
+Length: 3, dtype: str
+
+## corona_result value counts
+corona_result
+negative    260227
+positive     14729
+other         3892
+Name: count, dtype: int64
+
+## age_60_and_above value counts
+age_60_and_above
+NaN    127320
+No     125703
+Yes     25825
+Name: count, dtype: int64
+
+## gender value counts
+gender
+female    130158
+male      129127
+NaN        19563
+Name: count, dtype: int64
+
+## test_indication value counts
+test_indication
+Other                     242741
+Abroad                     25468
+Contact with confirmed     10639
+Name: count, dtype: int64
+
+## test_date range
+('2020-03-11', '2020-04-30', 51)
+
+## symptom columns value counts
+cough:
+cough
+0.0    236368
+1.0     42228
+NaN       252
+Name: count, dtype: int64
+fever:
+fever
+0.0    256844
+1.0     21752
+NaN       252
+Name: count, dtype: int64
+sore_throat:
+sore_throat
+0.0    276921
+1.0      1926
+NaN         1
+Name: count, dtype: int64
+shortness_of_breath:
+shortness_of_breath
+0.0    277270
+1.0      1577
+NaN         1
+Name: count, dtype: int64
+head_ache:
+head_ache
+0.0    276433
+1.0      2414
+NaN         1
+Name: count, dtype: int64
