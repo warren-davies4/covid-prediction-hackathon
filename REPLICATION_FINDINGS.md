@@ -40,6 +40,10 @@ The CSV in this repo (`ver_006`) is a slightly later/corrected release of the sa
 
 The curve shape matches Fig. 1a in the paper closely: a steep initial rise (first ~5% FPR already buys ~75–80% sensitivity) followed by a long, shallow tail — the hallmark of a few features (symptom combinations + contact history) doing most of the separating work, with diminishing returns after that.
 
+![Replication PRC curve](eda_output/17_replication_prc.png)
+
+The PRC curve shows precision staying near 0.9–1.0 up to ~recall 0.25, then falling off steeply — this is the `head_ache`-driven high-confidence region discussed below: a small number of near-certain predictions (people reporting the biased symptoms) get almost everything right, before precision drops once the model has to rely on the less separating cough/fever signal for the bulk of the remaining positives.
+
 ## Feature importance (SHAP) — a genuine difference worth flagging
 
 ![Replication SHAP summary](eda_output/09_replication_shap.png)
@@ -67,6 +71,10 @@ The paper reruns the model dropping the three symptoms it identified as having b
 ![Balanced-features ROC](eda_output/10_balanced_features_roc.png)
 
 **auROC lands right inside their reported CI** — the closest match of any metric in this whole replication.
+
+![Balanced-features PRC curve](eda_output/18_balanced_features_prc.png)
+
+Precision starts lower here (~0.85 at the very start, dipping to ~0.75 by recall 0.1) than the full model's near-1.0 start — consistent with losing the near-deterministic `head_ache` signal that gave the full model its artificially perfect top-of-ranking precision.
 
 ![Balanced-features SHAP summary](eda_output/11_balanced_features_shap.png)
 

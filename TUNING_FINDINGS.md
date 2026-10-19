@@ -19,6 +19,10 @@ Script: `tune_hyperparameters.py`. Model: `lgbm_tuned_model.txt`. Results: `tune
 
 ![Tuned ROC curve](eda_output/14_tuned_roc.png)
 
+![Tuned PRC curve](eda_output/20_tuned_prc.png)
+
+The PRC curve shows why auPRC jumped so much: precision stays close to 1.0 all the way out past recall 0.5, far further into the recall range than any other model here — the tuned hyperparameters let the model build a much larger set of near-certain, high-confidence predictions, not just a small headache-driven sliver like the untuned full model.
+
 5-fold CV mean auROC during search: **0.9356** (expected to be somewhat higher than the test score, since CV folds share the same ~10-day period and distribution as each other, while the test week is a genuinely different, later time period).
 
 Best hyperparameters found:
@@ -47,6 +51,12 @@ The search converges quickly (within ~10 trials) and stays flat — suggesting w
 This is the important catch. In `replicate_paper.py`'s SHAP plot, `head_ache` alone already looked suspiciously dominant (SHAP values up to ~1.4) — flagged there as a likely artifact of the paper's own documented reporting bias (headache was recorded almost exclusively for people already suspected positive). **In the tuned model, this effect is substantially larger**: `head_ache`, `sore_throat` and `shortness_of_breath` now show SHAP (margin) values up to **~4–5**, while `cough`/`fever`/`contact_confirmed`/`sex_male`/`age_60_plus` stay in the roughly ±0.5 range they were in before.
 
 In other words: part of why the tuned model scores higher is that the search found a hyperparameter configuration that lets the model lean on the three most biased-but-separating symptoms *even harder* than the paper's own settings did. This isn't a bug in the tuning — it's a legitimate improvement on the stated metrics (auROC/auPRC on this specific test week) — but it means the tuned model is arguably **less** trustworthy as a genuine clinical signal than the paper's original, even though it scores better.
+
+## All models' PRC curves compared
+
+![All models PRC comparison](eda_output/21_all_models_prc_comparison.png)
+
+Laid over each other, the tuned model's advantage is a straightforward reading of the plot: its curve (red) sits above the other three across almost the entire recall range, not just at one end — it's a genuinely better precision/recall trade-off everywhere, not a trick that only shows up in the aggregate auPRC number.
 
 ## Takeaway
 

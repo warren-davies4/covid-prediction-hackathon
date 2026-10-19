@@ -19,6 +19,12 @@ Resulting feature set (6 total): `sex`, `age_60_plus`, `cough`, `fever`, `contac
 
 **Result: a reasonable middle ground, but doesn't beat the full model.** The combined feature recovers most of the auROC gap vs. dropping the symptoms entirely (0.881 vs 0.865, closer to the full model's 0.889), confirming there's real signal in those three symptoms worth keeping in some form. But it doesn't beat the full 8-feature model on either metric, and auPRC in particular stays low (0.453, close to the balanced model's 0.456, well below the full model's 0.585).
 
+![Combined-feature ROC curve](eda_output/12_combined_biased_feature_roc.png)
+
+![Combined-feature PRC curve](eda_output/19_combined_biased_feature_prc.png)
+
+The PRC curve makes the auPRC gap concrete: precision starts around 0.4–0.7 at low recall, nowhere near the full model's near-1.0 start (see `REPLICATION_FINDINGS.md`'s PRC plot) — losing the three symptoms as individual features costs the model its small set of near-certain, high-confidence predictions, even though it recovers much of the overall ranking quality (auROC).
+
 **Why it likely falls short of the full model:** collapsing three symptoms into one OR flag throws away information about *which* symptom was reported and loses the ability to combine them (e.g. headache + sore throat together is more informative than either alone, which an OR can't distinguish from just one being true). The full model's main problem was that `head_ache` individually was over-trusted due to reporting bias — but LightGBM's tree splits can still extract genuine value from the other two biased symptoms when they're separate, more than an OR captures.
 
 **SHAP ranking with the combined feature:** fever > cough > contact_confirmed > sex_male > any_biased_symptom > age_60_plus. The combined feature now sits mid-pack rather than dominating — the "overconfidence" artifact from standalone `head_ache` is gone, and the SHAP importance ordering now looks qualitatively similar to the paper's own (cough/fever/contact/sex/age all ranked above the biased-symptom group), while still using the information that was lost in the balanced-features drop.
