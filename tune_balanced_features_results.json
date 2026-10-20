@@ -1,0 +1,27 @@
+{
+  "n_trials": 60,
+  "n_folds": 5,
+  "features": [
+    "sex_male",
+    "age_60_plus",
+    "cough",
+    "fever",
+    "contact_confirmed"
+  ],
+  "best_cv_auroc": 0.9109103627147468,
+  "best_params": {
+    "num_leaves": 33,
+    "min_data_in_leaf": 163,
+    "feature_fraction": 0.7329720899582056,
+    "bagging_fraction": 0.8848761882013343,
+    "bagging_freq": 5,
+    "learning_rate": 0.01096286578588531,
+    "lambda_l1": 4.778010862852287e-06,
+    "lambda_l2": 0.29196863492890834
+  },
+  "best_num_boost_round": 29,
+  "test_auroc": 0.8740258827231843,
+  "test_auprc": 0.5576061459695079,
+  "baseline_test_auroc": 0.8654,
+  "baseline_test_auprc": 0.4562
+}
